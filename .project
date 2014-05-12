@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>掠網站資料</name>
+	<name>掠網路資料</name>
 	<comment></comment>
 	<projects>
-		<project>xgoogle</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
