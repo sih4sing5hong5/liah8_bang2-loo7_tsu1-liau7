@@ -2,7 +2,7 @@ import urllib.parse
 from 掠資料.GoogleScrape import scrape
 '''
 http://incolumitas.com/2013/01/06/googlesearch-a-rapid-python-class-to-get-search-results/
-pip3.4 install install lxml requests cssselect BeautifulSoup4 SocksiPy-branch
+pip3.4 install lxml requests cssselect BeautifulSoup4 SocksiPy-branch
 '''
 
 if __name__ == '__main__':
