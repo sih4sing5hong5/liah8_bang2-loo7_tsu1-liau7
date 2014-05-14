@@ -42,7 +42,7 @@ class 揣相關網站:
 		'oe': 'utf-8'  # Sets the character encoding that is used to encode the results.
 		}
 if __name__ == '__main__':
-	結果 = 揣相關網站().揣('dictionary ', 幾筆=25)
+	結果 = 揣相關網站().揣('無法度 台語 閩南語', 幾筆=25)
 	for 一筆 in 結果[:8]:
 		print(一筆[0])
 	print(len(結果))
