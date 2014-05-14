@@ -24,7 +24,7 @@ Note: Scraping compromises the google terms of service (TOS).
 """
 
 __VERSION__ = '0.4'
-__UPDATED__ = '17.02.2014' # day.month.year
+__UPDATED__ = '17.02.2014'  # day.month.year
 __AUTHOR__ = 'Nikolai Tschacher'
 __WEBSITE__ = 'incolumitas.com'
 
@@ -46,7 +46,7 @@ try:
     import requests
     from cssselect import HTMLTranslator, SelectorError
     from bs4 import UnicodeDammit
-    import socks # should be in the same directory
+    import socks  # should be in the same directory
 except ImportError as e:
     print(e.msg)
     print('You can install missing modules with `pip install [modulename]`')
@@ -154,11 +154,11 @@ class GoogleScrape(threading.Thread):
 
     # Valid URL (taken from django)
     _REGEX_VALID_URL = re.compile(
-        r'^(?:http|ftp)s?://' # http:// or https://
-        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' # domain...
-        r'localhost|' # localhost...
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
-        r'(?::\d+)?' # optional port
+        r'^(?:http|ftp)s?://'  # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+        r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
     _REGEX_VALID_URL_SIMPLE = re.compile(
         'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
@@ -207,13 +207,13 @@ class GoogleScrape(threading.Thread):
         logger.debug("Created new GoogleScrape object with params: query={}, num_results_per_page={}, num_page={}".format(
             search_query, num_results_per_page, num_page))
         self.search_query = search_query
-        if num_results_per_page not in range(0, 1001): # The maximum value of this parameter is 1000. See search appliance docs
+        if num_results_per_page not in range(0, 1001):  # The maximum value of this parameter is 1000. See search appliance docs
             logger.error('The parameter -n must be smaller or equal to 1000')
             raise InvalidNumberResultsException(num_results_per_page)
 
-        if num_page*num_results_per_page + num_results_per_page > 1000:
+        if num_page * num_results_per_page + num_results_per_page > 1000:
             logger.error('The maximal number of results for a query is 1000')
-            raise InvalidNumberResultsException(num_page*num_results_per_page + num_results_per_page)
+            raise InvalidNumberResultsException(num_page * num_results_per_page + num_results_per_page)
 
         self.num_results_per_page = num_results_per_page
         self.num_page = num_page
@@ -222,43 +222,43 @@ class GoogleScrape(threading.Thread):
 
         # http://www.rankpanel.com/blog/google-search-parameters/
         self._SEARCH_PARAMS = {
-            'q': '', # the search query string
-            'num': '', # the number of results per page
-            'numgm': None, # Number of KeyMatch results to return with the results. A value between 0 to 50 can be specified for this option.
-            'start': '0', # Specifies the index number of the first entry in the result set that is to be returned. page number = (start / num) + 1
+            'q': '',  # the search query string
+            'num': '',  # the number of results per page
+            'numgm': None,  # Number of KeyMatch results to return with the results. A value between 0 to 50 can be specified for this option.
+            'start': '0',  # Specifies the index number of the first entry in the result set that is to be returned. page number = (start / num) + 1
                           # The maximum number of results available for a query is 1,000, i.e., the value of the start parameter added to the value of the num parameter cannot exceed 1,000.
-            'rc': '', # Request an accurate result count for up to 1M documents. If a user submits a search query without the site parameter, the entire search index is queried.
-            'site': None, # Limits search results to the contents of the specified collection.
-            'sort': None, # Specifies a sorting method. Results can be sorted by date.
-            'client': None, # required parameter. Indicates a valid front end.
-            'output': None, # required parameter. Selects the format of the search results.
-            'partialfields': None, # Restricts the search results to documents with meta tags whose values contain the specified words or phrases.
-            'pws': '0',      # personalization turned off
-            'cd': None, # Passes down the keyword rank clicked.
-            'filter': 0, # Include omitted results
-            'complete': 0, #Turn auto-suggest and Google Instant on (=1) or off (=0)
-            'nfpr': 1, #Turn off auto-correction of spelling
-            'ncr': 1, #No country redirect: Allows you to set the Google country engine you would like to use despite your current geographic location.
-            'safe': 'off', # Turns the adult content filter on or off
-            'rls': None, #Source of query with version of the client and language set, other examples are can be found
-            'source': None,  #Google navigational parameter specifying where you came from, here universal search
-            'tbm': None, # Used when you select any of the “special” searches, like image search or video search
-            'tbs': None, # Also undocumented as `tbm`, allows you to specialize the time frame of the results you want to obtain.
+            'rc': '',  # Request an accurate result count for up to 1M documents. If a user submits a search query without the site parameter, the entire search index is queried.
+            'site': None,  # Limits search results to the contents of the specified collection.
+            'sort': None,  # Specifies a sorting method. Results can be sorted by date.
+            'client': None,  # required parameter. Indicates a valid front end.
+            'output': None,  # required parameter. Selects the format of the search results.
+            'partialfields': None,  # Restricts the search results to documents with meta tags whose values contain the specified words or phrases.
+            'pws': '0',  # personalization turned off
+            'cd': None,  # Passes down the keyword rank clicked.
+            'filter': 0,  # Include omitted results
+            'complete': 0,  # Turn auto-suggest and Google Instant on (=1) or off (=0)
+            'nfpr': 1,  # Turn off auto-correction of spelling
+            'ncr': 1,  # No country redirect: Allows you to set the Google country engine you would like to use despite your current geographic location.
+            'safe': 'off',  # Turns the adult content filter on or off
+            'rls': None,  # Source of query with version of the client and language set, other examples are can be found
+            'source': None,  # Google navigational parameter specifying where you came from, here universal search
+            'tbm': None,  # Used when you select any of the “special” searches, like image search or video search
+            'tbs': None,  # Also undocumented as `tbm`, allows you to specialize the time frame of the results you want to obtain.
                          # Examples: Any time: tbs=qdr:a, Last second: tbs=qdr:s, Last minute: tbs=qdr:n, Last day: tbs=qdr:d, Time range: tbs=cdr:1,cd_min:3/2/1984,cd_max:6/5/1987
                          # But the tbs parameter is also used to specify content:
                          # Examples: Sites with images: tbs=img:1, Results by reading level, Basic level: tbs=rl:1,rls:0, Results that are translated from another language: tbs=clir:1,
                          # For full documentation, see http://stenevang.wordpress.com/2013/02/22/google-search-url-request-parameters/
-            'lr': 'lang_de', # Restricts searches to pages in the specified language. If there are no results in the specified language, the search appliance displays results in all languages .
+            'lr': 'lang_de',  # Restricts searches to pages in the specified language. If there are no results in the specified language, the search appliance displays results in all languages .
                              # lang_xx where xx is the country code such as en, de, fr, ca, ...
-            'hl': 'en', # Language settings passed down by your browser
-            'cr': 'countryDE', # The region the results should come from
-            'gr': None, # Just as gl shows you how results look in a specified country, gr limits the results to a certain region
-            'gcs': None, # Limits results to a certain city, you can also use latitude and longitude
-            'gpc': None, #Limits results to a certain zip code
-            'gm': None, # Limits results to a certain metropolitan region
-            'gl': 'de', # as if the search was conducted in a specified location. Can be unreliable.
-            'ie': 'utf-8', # Sets the character encoding that is used to interpret the query string.
-            'oe': 'utf-8' # Sets the character encoding that is used to encode the results.
+            'hl': 'en',  # Language settings passed down by your browser
+            'cr': 'countryDE',  # The region the results should come from
+            'gr': None,  # Just as gl shows you how results look in a specified country, gr limits the results to a certain region
+            'gcs': None,  # Limits results to a certain city, you can also use latitude and longitude
+            'gpc': None,  # Limits results to a certain zip code
+            'gm': None,  # Limits results to a certain metropolitan region
+            'gl': 'de',  # as if the search was conducted in a specified location. Can be unreliable.
+            'ie': 'utf-8',  # Sets the character encoding that is used to interpret the query string.
+            'oe': 'utf-8'  # Sets the character encoding that is used to encode the results.
         }
 
         # Maybe update the default search params when the user has supplied a dictionary
@@ -266,10 +266,10 @@ class GoogleScrape(threading.Thread):
             self._SEARCH_PARAMS.update(search_params)
 
         self.SEARCH_RESULTS = {
-            'cache_file': None, # A path to a file that caches the results.
-            'search_keyword': self.search_query, # The query keyword
-            'num_results_for_kw': '', # The number of results for the keyword
-            'results': [] # List of Result named tuples
+            'cache_file': None,  # A path to a file that caches the results.
+            'search_keyword': self.search_query,  # The query keyword
+            'num_results_for_kw': '',  # The number of results for the keyword
+            'results': []  # List of Result named tuples
         }
 
     def run(self):
@@ -388,7 +388,7 @@ class GoogleScrape(threading.Thread):
             logger.critical(e.msg)
 
 
-def scrape(query, num_results_per_page=100, num_pages=1, offset=0):
+def scrape(query, num_results_per_page=100, num_pages=1, offset=0, search_params={}):
     """Public API function to search for terms and return a list of results.
 
     arguments:
@@ -400,7 +400,7 @@ def scrape(query, num_results_per_page=100, num_pages=1, offset=0):
     offset -- specifies the offset to the page to begin searching.
 
     """
-    threads = [GoogleScrape(query, num_results_per_page, i) for i in range(offset, num_pages + offset, 1)]
+    threads = [GoogleScrape(query, num_results_per_page, i, search_params) for i in range(offset, num_pages + offset, 1)]
 
     for t in threads:
         t.start()
@@ -435,10 +435,10 @@ if __name__ == '__main__':
                         default=1,
                         help='The number of pages to search in. Each page is requested by a unique connection and if possible by a unique IP.')
     parser.add_argument('--proxy', metavar='proxycredentials', type=str, dest='proxy', action='store',
-                        required=False, #default=('127.0.0.1', 9050)
+                        required=False,  # default=('127.0.0.1', 9050)
                         help='A string such as "127.0.0.1:9050" specifying a single proxy server')
     parser.add_argument('--proxy_file', metavar='proxyfile', type=str, dest='proxy_file', action='store',
-                        required=False, #default='.proxies'
+                        required=False,  # default='.proxies'
                         help='A filename for a list of proxies (supported are HTTP PROXIES, SOCKS4/4a/5) with the following format: "Proxyprotocol (proxy_ip|proxy_host):Port\\n"')
     parser.add_argument('-x', '--deep-scrape', action='store_true', default=False, help='Launches a wide range of parallel searches by modifying the search ' \
                         'query string with synonyms and by scraping with different Google search parameter combinations that might yield more unique ' \
@@ -462,7 +462,7 @@ if __name__ == '__main__':
 
         # Patch the socket module
         socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, proxy_host, int(proxy_port),
-                              rdns=True) # rdns is by default on true. Never use rnds=False with TOR, otherwise you are screwed!
+                              rdns=True)  # rdns is by default on true. Never use rnds=False with TOR, otherwise you are screwed!
         socks.wrap_module(socket)
         socket.create_connection = create_connection
 
