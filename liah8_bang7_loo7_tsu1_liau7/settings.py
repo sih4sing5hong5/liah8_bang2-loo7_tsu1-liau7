@@ -11,8 +11,11 @@ BOT_NAME = 'liah8_bang7_loo7_tsu1_liau7'
 SPIDER_MODULES = ['liah8_bang7_loo7_tsu1_liau7.spiders']
 NEWSPIDER_MODULE = 'liah8_bang7_loo7_tsu1_liau7.spiders'
 
+ITEM_PIPELINES = {
+    'liah8_bang7_loo7_tsu1_liau7.pipelines.Bang7Loo7Pipeline': 300,
+}
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'liah8_TGB (+http://www.yourdomain.com)'
-DOWNLOAD_DELAY = 0.5
+DOWNLOAD_DELAY = 0.05
 RANDOMIZE_DOWNLOAD_DELAY = True
 CONCURRENT_REQUESTS_PER_IP = 2
