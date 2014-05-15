@@ -6,10 +6,10 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #
 
-BOT_NAME = 'liah8_TGB'
+BOT_NAME = 'liah8_bang7_loo7_tsu1_liau7'
 
-SPIDER_MODULES = ['liah8_TGB.spiders']
-NEWSPIDER_MODULE = 'liah8_TGB.spiders'
+SPIDER_MODULES = ['liah8_bang7_loo7_tsu1_liau7.spiders']
+NEWSPIDER_MODULE = 'liah8_bang7_loo7_tsu1_liau7.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'liah8_TGB (+http://www.yourdomain.com)'
